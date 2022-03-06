@@ -30,7 +30,6 @@ export const TodoRegister = () => {
       <h2>Todo登録</h2>
       <input type="text" value={newTodo} onChange={changeValue} />
       <button onClick={onAddTodo}>登録</button>
-      {/* <TodoList todoItems={incompleteTodos} /> */}
       <Link to={"/todolist"} state={{ state: incompleteTodos }}>
         Todo一覧へ
       </Link>
