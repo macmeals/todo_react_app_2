@@ -17,7 +17,14 @@ export const TodoList = () => {
     const deleteTodos = [...todoLists] // 削除する対象のデータ配列を関数deleteTodoに格納
     deleteTodos.splice(index, 1) // index番号から１番目の要素を削除
     setTodoLists(deleteTodos)
-    // setIncompleteTodosに状態を保存
+    // setTodoListsでtodoListsにstate保存
+  }
+
+  // todoリストを完了（completeFlagをTrueにする）関数onCompleteTodoを定義
+  const onCompleteTodo = (index) => {
+    const CompleteTodos = [...todoLists] // 完了する対象のデータ配列を関数CompTodosTodoに格納
+    CompleteTodos[index].completeFlag = true //対象のデータ配列のCompleteFlagをTrueにする
+    setTodoLists(CompleteTodos) // setTodoListsでtodoListsにstate保存
   }
 
   return (
@@ -31,6 +38,7 @@ export const TodoList = () => {
                 {todos.todo}
               </p>
               <button onClick={() => onDeleteTodo(index)}>削除</button>
+              <button onClick={() => onCompleteTodo(index)}>完了</button>
             </li>
           )
         })}
