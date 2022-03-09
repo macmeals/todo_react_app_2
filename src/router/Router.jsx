@@ -1,6 +1,5 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
-
 import { TodoRegisterRoutes } from "./TodoRegisterRoutes"
 import { TodoListRoutes } from "./TodoListRoutes"
 import { TodoUpdateRoutes } from "./TodoUpdateRoutes"
