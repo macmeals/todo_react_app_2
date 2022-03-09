@@ -12,7 +12,7 @@ export const App = () => {
         </header>
       </div>
       <BrowserRouter>
-        <Router />
+        <Router /> {/* //Router.jsxを呼び出す。 */}
       </BrowserRouter>
     </div>
   )
