@@ -2,10 +2,8 @@
 /** @jsxImportSource @emotion/react */
 
 import logo from "./logo.svg"
-import "./App.css"
 import { Router } from "./router/Router"
 import { BrowserRouter } from "react-router-dom"
-
 import { css } from "@emotion/react"
 
 export const App = () => {
@@ -25,6 +23,14 @@ export const App = () => {
   const appLogo = css`
     height: 20vmin;
     animation: App-logo-spin infinite 20s linear;
+    @keyframes App-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
   `
 
   return (
