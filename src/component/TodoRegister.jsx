@@ -6,6 +6,7 @@ import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+import DayPickerInput from "react-day-picker/DayPickerInput"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -45,29 +46,57 @@ export const TodoRegister = () => {
     }
   `
 
-  //  初期値valueを空にセット、状態を格納する変数setValueをセット
+  //  初期値Todoタスクのvalueを空にセット、状態を格納する変数setNewTodoをセット
   const [newTodo, setNewTodo] = useState("")
+
+  //  初期値Todoの開始日のvalueを空にセット、状態を格納する変数setStartDateをセット
+  const [startDate, setStartDate] = useState("")
+
+  //  初期値Todoの終了日のvalueを空にセット、状態を格納する変数setEndDateをセット
+  const [endDate, setEndDate] = useState("")
 
   // 初期値incompTodosにオブジェクト型の空配列をセット、状態をsetIncompleteTodosに格納する
   const [incompleteTodos, setIncompleteTodos] = useState([])
 
-  // テキストボックスで入力した値を保存する
+  // todoタスクのテキストボックスで入力した値を保存する
   const changeValue = (e) => setNewTodo(e.target.value)
 
+  // onAddTodoを実施して、incompleteTodosでtodoリスト、完了フラグ、開始日、終了日を格納
   const onAddTodo = () => {
     if (newTodo === "") return
     const newTodos = [
       ...incompleteTodos,
-      { id: incompleteTodos.length, todo: newTodo, completeFlag: false },
+      {
+        id: incompleteTodos.length,
+        todo: newTodo,
+        completeFlag: false,
+        from: startDate,
+        end: endDate,
+      },
     ]
     setIncompleteTodos(newTodos) // setIncompleteTodosにnewTodosの状態を登録
     setNewTodo("") // setNewTodoに空の状態を登録
+    input.current.value = ""
     toast.success("Todoを登録しました.")
+    console.log(incompleteTodos)
+  }
+  // 開始日の状態を保存
+  const handleStartDay = (startDay) => {
+    setStartDate(startDay)
+  }
+  // 終了日の状態を保存
+  const handleEndDay = (endDay) => {
+    setEndDate(endDay)
   }
 
   return (
     <div css={registerStyle}>
       <h2>Todo登録</h2>
+      <p>１．Todo開始日</p>
+      <DayPickerInput onDayChange={(startDay) => handleStartDay(startDay)} />
+      <p>２．Todo完了日</p>
+      <DayPickerInput onDayChange={(endDay) => handleEndDay(endDay)} />
+      <p>３．Todoタスク</p>
       <input
         css={inputStyle}
         type="text"
