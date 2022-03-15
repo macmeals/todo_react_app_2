@@ -6,6 +6,8 @@ import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+// import DayPickerInput from "react-day-picker/DayPickerInput"
+import DayPicker from "react-day-picker"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -45,29 +47,72 @@ export const TodoRegister = () => {
     }
   `
 
-  //  初期値valueを空にセット、状態を格納する変数setValueをセット
+  //  初期値Todoタスクのvalueを空にセット、状態を格納する変数setNewTodoをセット
   const [newTodo, setNewTodo] = useState("")
+
+  //  初期値Todoの開始日のvalueを空にセット、状態を格納する変数setStartDateをセット
+  const [startDate, setStartDate] = useState(undefined)
+
+  //  初期値Todoの終了日のvalueを空にセット、状態を格納する変数setEndDateをセット
+  const [endDate, setEndDate] = useState(undefined)
 
   // 初期値incompTodosにオブジェクト型の空配列をセット、状態をsetIncompleteTodosに格納する
   const [incompleteTodos, setIncompleteTodos] = useState([])
 
-  // テキストボックスで入力した値を保存する
+  // todoタスクのテキストボックスで入力した値を保存する
   const changeValue = (e) => setNewTodo(e.target.value)
 
+  // onAddTodoを実施して、incompleteTodosでtodoリスト、完了フラグ、開始日、終了日を格納
   const onAddTodo = () => {
     if (newTodo === "") return
     const newTodos = [
       ...incompleteTodos,
-      { id: incompleteTodos.length, todo: newTodo, completeFlag: false },
+      {
+        id: incompleteTodos.length,
+        todo: newTodo,
+        completeFlag: false,
+        from: startDate,
+        end: endDate,
+      },
     ]
     setIncompleteTodos(newTodos) // setIncompleteTodosにnewTodosの状態を登録
     setNewTodo("") // setNewTodoに空の状態を登録
     toast.success("Todoを登録しました.")
+    console.log(incompleteTodos)
+    setStartDate(undefined) // 開始日をリセット
+    setEndDate(undefined) // 終了日をリセット
+  }
+  // 開始日の状態を保存
+  // onDayClickのイベントハンドラーはdayという引数で日程を取得可能
+  // 取得した日程をstartDateの状態を保管
+  const handleStartDay = (day) => {
+    setStartDate(day.toLocaleDateString())
+  }
+  // 終了日の状態を保存
+  // onDayClickのイベントハンドラーはdayという引数で日程を取得可能
+  // 取得した日程をendDateの状態を保管
+  const handleEndDay = (day) => {
+    setEndDate(day.toLocaleDateString())
   }
 
   return (
     <div css={registerStyle}>
       <h2>Todo登録</h2>
+      <p>１．Todo開始日</p>
+      <DayPicker onDayClick={handleStartDay} />
+      {startDate ? (
+        <p> 【Todo開始日】{startDate}</p>
+      ) : (
+        <p>開始日を選択して下さい</p>
+      )}
+      <p>２．Todo完了日</p>
+      <DayPicker onDayClick={handleEndDay} />
+      {startDate ? (
+        <p>【Todo終了日】{endDate}</p>
+      ) : (
+        <p>終了日を選択して下さい</p>
+      )}
+      <p>３．Todoタスク</p>
       <input
         css={inputStyle}
         type="text"

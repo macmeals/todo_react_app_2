@@ -24,7 +24,7 @@ export const TodoList = () => {
   const StyledList = styled.li`
     display: flex;
     > p {
-      width: 60vw;
+      width: 20vw;
       text-decoration: ${(props) => (props.todoflag ? "line-through" : "")};
     }
   `
@@ -82,7 +82,10 @@ export const TodoList = () => {
         {todoLists.map((todos, index) => {
           return (
             <StyledList key={todos.id} todoflag={todos.completeFlag}>
+              <p>{todos.from}</p>
+              <p>{todos.end}</p>
               <p>{todos.todo}</p>
+
               <Listbutton onClick={() => onDeleteTodo(index)}>削除</Listbutton>
               <Listbutton onClick={() => onCompleteTodo(index)}>
                 完了
