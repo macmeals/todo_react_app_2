@@ -6,8 +6,8 @@ import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
-// import DayPickerInput from "react-day-picker/DayPickerInput"
 import DayPicker from "react-day-picker"
+import "react-day-picker/lib/style.css"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -15,6 +15,11 @@ export const TodoRegister = () => {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  `
+  const matrixStyle = css`
+    display: flex;
+    width: 50vw;
+    justify-content: space-between;
   `
   const inputStyle = css`
     width: 600px;
@@ -98,20 +103,26 @@ export const TodoRegister = () => {
   return (
     <div css={registerStyle}>
       <h2>Todo登録</h2>
-      <p>１．Todo開始日</p>
-      <DayPicker onDayClick={handleStartDay} />
-      {startDate ? (
-        <p> 【Todo開始日】{startDate}</p>
-      ) : (
-        <p>開始日を選択して下さい</p>
-      )}
-      <p>２．Todo完了日</p>
-      <DayPicker onDayClick={handleEndDay} />
-      {startDate ? (
-        <p>【Todo終了日】{endDate}</p>
-      ) : (
-        <p>終了日を選択して下さい</p>
-      )}
+      <div css={matrixStyle}>
+        <div css={registerStyle}>
+          <p>１．Todo開始日</p>
+          <DayPicker onDayClick={handleStartDay} />
+          {startDate ? (
+            <p> 【Todo開始日】{startDate}</p>
+          ) : (
+            <p>開始日を選択して下さい</p>
+          )}
+        </div>
+        <div css={registerStyle}>
+          <p>２．Todo完了日</p>
+          <DayPicker onDayClick={handleEndDay} />
+          {endDate ? (
+            <p>【Todo終了日】{endDate}</p>
+          ) : (
+            <p>終了日を選択して下さい</p>
+          )}
+        </div>
+      </div>
       <p>３．Todoタスク</p>
       <input
         css={inputStyle}
