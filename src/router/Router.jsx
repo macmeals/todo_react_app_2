@@ -4,6 +4,7 @@ import { TodoRegisterRoutes } from "./TodoRegisterRoutes"
 import { TodoListRoutes } from "./TodoListRoutes"
 import { TodoUpdateRoutes } from "./TodoUpdateRoutes"
 import { TopPage } from "../component/TopPage"
+import { Page404 } from "../component/Page404"
 
 export const Router = () => {
   return (
@@ -39,6 +40,7 @@ export const Router = () => {
           />
         ))}
       </Route>
+      <Route path="*" element={<Page404 />} />
     </Routes>
   )
 }
