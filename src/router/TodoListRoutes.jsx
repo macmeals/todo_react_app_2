@@ -1,8 +1,7 @@
 import { TodoList } from "../component/TodoList"
-import { TodoUpdate } from "../component/TodoUpdate"
+import { Page404 } from "../component/Page404"
 
 export const TodoListRoutes = [
   { path: "", exact: true, children: <TodoList /> },
-
-  { path: "todoupdate", exact: false, children: <TodoUpdate /> },
+  { path: "*", exact: false, children: <Page404 /> },
 ]
