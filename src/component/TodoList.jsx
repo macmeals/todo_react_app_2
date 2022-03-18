@@ -19,15 +19,39 @@ export const TodoList = () => {
     font-size: 20px;
     height: 50px;
   `
+  const todoTitleStyle = css`
+    width: 80vw;
+    background-color: #eee6e6;
+  `
+  const todoListStyle = css`
+    width: 80vw;
+    padding-inline-start: 0;
+  `
 
   // StyledListからpropsを受け取り、todoFlagがtrueの場合、text-decoration:line-throughとなる
   const StyledList = styled.li`
     display: flex;
+    padding-left: 20px;
+    align-items: center;
     > p {
       width: 20vw;
       text-decoration: ${(props) => (props.todoflag ? "line-through" : "")};
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+    &:nth-child(even) {
+      background-color: #ffeded;
     }
   `
+
+  const TodoTitles = styled.div`
+    display: flex;
+    margin-left: 20px;
+    > p {
+      width: 20vw;
+    }
+  `
+
   const Listbutton = styled.button`
     color: black;
     background-color: white;
@@ -78,7 +102,14 @@ export const TodoList = () => {
   return (
     <div css={todoStyle}>
       <h2>Todo一覧</h2>
-      <ul>
+      <div css={todoTitleStyle}>
+        <TodoTitles>
+          <p>Todo開始日</p>
+          <p>Todo終了日</p>
+          <p>Todoタスク</p>
+        </TodoTitles>
+      </div>
+      <ul css={todoListStyle}>
         {todoLists.map((todos, index) => {
           return (
             <StyledList key={todos.id} todoflag={todos.completeFlag}>
