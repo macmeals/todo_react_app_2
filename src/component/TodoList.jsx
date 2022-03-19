@@ -1,11 +1,14 @@
 // "@emotion/react"には以下が必須
 /** @jsxImportSource @emotion/react */
 
-import { Link, useLocation } from "react-router-dom"
+// import { Link, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+import { LinkText } from "./LinkText"
+import { EventButton } from "./Button"
 
 export const TodoList = () => {
   const todoStyle = css`
@@ -15,10 +18,6 @@ export const TodoList = () => {
     align-items: center;
   `
 
-  const linkstyle = css`
-    font-size: 20px;
-    height: 50px;
-  `
   const todoTitleStyle = css`
     width: 80vw;
     background-color: #eee6e6;
@@ -49,28 +48,6 @@ export const TodoList = () => {
     margin-left: 20px;
     > p {
       width: 20vw;
-    }
-  `
-
-  const Listbutton = styled.button`
-    color: black;
-    background-color: white;
-    display: inline-block;
-    padding: 0.5em 1.7em;
-    margin: 30px 30px 30px 0;
-    border: 1px solid black;
-    border-radius: 2em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
-    text-align: center;
-    transition: all 0.2s;
-
-    &:hover {
-      color: white;
-      background-color: black;
     }
   `
 
@@ -116,19 +93,22 @@ export const TodoList = () => {
               <p>{todos.from}</p>
               <p>{todos.end}</p>
               <p>{todos.todo}</p>
-
-              <Listbutton onClick={() => onDeleteTodo(index)}>削除</Listbutton>
-              <Listbutton onClick={() => onCompleteTodo(index)}>
-                完了
-              </Listbutton>
+              {/* EvnentButtonコンポーネントを呼び出す */}
+              <EventButton
+                clickEvent={onDeleteTodo}
+                indexNumber={index}
+                buttonName={"削除"}
+              />
+              <EventButton
+                clickEvent={onCompleteTodo}
+                indexNumber={index}
+                buttonName={"完了"}
+              />
             </StyledList>
           )
         })}
       </ul>
-
-      <Link to="/todoregister" css={linkstyle}>
-        Todo登録
-      </Link>
+      <LinkText destination={"/todoregister"} linkName={"Todo登録"} />
     </div>
   )
 }

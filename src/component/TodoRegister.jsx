@@ -1,13 +1,13 @@
 // "@emotion/react"には以下が必須
 /** @jsxImportSource @emotion/react */
 
-import { Link } from "react-router-dom"
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { css } from "@emotion/react"
-import styled from "@emotion/styled"
 import DayPicker from "react-day-picker"
 import "react-day-picker/lib/style.css"
+import { LinkText } from "./LinkText"
+import { EventButton } from "./Button"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -23,33 +23,6 @@ export const TodoRegister = () => {
   `
   const inputStyle = css`
     width: 600px;
-  `
-
-  const linkstyle = css`
-    font-size: 20px;
-    height: 50px;
-  `
-
-  const StyledButton = styled.button`
-    color: black;
-    background-color: white;
-    display: inline-block;
-    padding: 0.5em 1.7em;
-    margin: 30px 0 30px 0;
-    border: 1px solid black;
-    border-radius: 2em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
-    text-align: center;
-    transition: all 0.2s;
-
-    &:hover {
-      color: white;
-      background-color: black;
-    }
   `
 
   //  初期値Todoタスクのvalueを空にセット、状態を格納する変数setNewTodoをセット
@@ -130,12 +103,15 @@ export const TodoRegister = () => {
         value={newTodo}
         onChange={changeValue}
       />
-      <StyledButton onClick={onAddTodo}>登録</StyledButton>
+      {/* EvnentButtonコンポーネントを呼び出す。clickEventにイベント buttonNameを名前をPropsに渡す*/}
+      <EventButton clickEvent={onAddTodo} buttonName={"登録"} />
       <Toaster />
-      {/* LinkコンポーネントでStateを渡す（渡す値はincompleteTodos） */}
-      <Link to={"/todolist"} state={{ state: incompleteTodos }} css={linkstyle}>
-        Todo一覧へ
-      </Link>
+      {/* LinkTextコンポーネントを呼び出す。destinationにリンク先、linkNameにリンク名、格納した配列をlinkStateにPropで渡す */}
+      <LinkText
+        destination={"/todolist"}
+        linkName={"Todo一覧へ"}
+        linkState={incompleteTodos}
+      />
     </div>
   )
 }
