@@ -7,7 +7,7 @@ import { css } from "@emotion/react"
 import DayPicker from "react-day-picker"
 import "react-day-picker/lib/style.css"
 import { LinkText } from "./LinkText"
-import { EventButton } from "./Button"
+import { Button } from "./Button"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -104,14 +104,13 @@ export const TodoRegister = () => {
         onChange={changeValue}
       />
       {/* EvnentButtonコンポーネントを呼び出す。clickEventにイベント buttonNameを名前をPropsに渡す*/}
-      <EventButton clickEvent={onAddTodo} buttonName={"登録"} />
+      {/* <Button clickEvent={onAddTodo} buttonName={"登録"} /> */}
+      <Button onClickEvent={() => onAddTodo()}>登録</Button>
       <Toaster />
       {/* LinkTextコンポーネントを呼び出す。destinationにリンク先、linkNameにリンク名、格納した配列をlinkStateにPropで渡す */}
-      <LinkText
-        destination={"/todolist"}
-        linkName={"Todo一覧へ"}
-        linkState={incompleteTodos}
-      />
+      <LinkText destination={"/todolist"} linkState={incompleteTodos}>
+        Todo一覧へ
+      </LinkText>
     </div>
   )
 }
