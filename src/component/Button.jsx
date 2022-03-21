@@ -3,8 +3,9 @@
 
 import styled from "@emotion/styled"
 
-export const EventButton = (props) => {
-  const { clickEvent, indexNumber, buttonName } = props
+export const Button = (props) => {
+  // const { clickEvent, indexNumber, buttonName } = props
+  const { onClickEvent } = props
   const StyledButton = styled.button`
     color: black;
     background-color: white;
@@ -30,10 +31,10 @@ export const EventButton = (props) => {
     <div>
       <StyledButton
         onClick={() => {
-          clickEvent(indexNumber)
+          onClickEvent()
         }}
       >
-        {buttonName}
+        {props.children}
       </StyledButton>
     </div>
   )

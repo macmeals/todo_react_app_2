@@ -8,7 +8,7 @@ import { useEffect } from "react"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import { LinkText } from "./LinkText"
-import { EventButton } from "./Button"
+import { Button } from "./Button"
 
 export const TodoList = () => {
   const todoStyle = css`
@@ -94,21 +94,25 @@ export const TodoList = () => {
               <p>{todos.end}</p>
               <p>{todos.todo}</p>
               {/* EvnentButtonコンポーネントを呼び出す */}
-              <EventButton
+              {/* <Button
                 clickEvent={onDeleteTodo}
                 indexNumber={index}
                 buttonName={"削除"}
-              />
-              <EventButton
+              /> */}
+              <Button onClickEvent={() => onDeleteTodo(index)}>削除</Button>
+              {/* <Button
                 clickEvent={onCompleteTodo}
                 indexNumber={index}
                 buttonName={"完了"}
-              />
+              /> */}
+              <Button onClickEvent={() => onCompleteTodo(index)}>完了</Button>
+              {/* <Button onClickEvent={onCompleteTodo(index)}>削除</Button> */}
             </StyledList>
           )
         })}
       </ul>
-      <LinkText destination={"/todoregister"} linkName={"Todo登録"} />
+      {/* <LinkText destination={"/todoregister"} linkName={"Todo登録"} /> */}
+      <LinkText destination={"/todoregister"}>Todo登録</LinkText>
     </div>
   )
 }
