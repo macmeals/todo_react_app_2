@@ -1,7 +1,6 @@
 // "@emotion/react"には以下が必須
 /** @jsxImportSource @emotion/react */
 
-// import { Link, useLocation } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
@@ -38,7 +37,7 @@ export const TodoList = () => {
       margin-block-start: 0;
       margin-block-end: 0;
     }
-    &:nth-child(even) {
+    &:nth-of-type(2n) {
       background-color: #ffeded;
     }
   `
@@ -73,7 +72,6 @@ export const TodoList = () => {
     const CompleteTodos = [...todoLists] // 完了する対象のデータ配列を関数CompTodosTodoに格納
     CompleteTodos[index].completeFlag = true //対象のデータ配列のCompleteFlagをTrueにする
     setTodoLists(CompleteTodos) // setTodoListsでtodoListsにstate保存
-    console.log(todoLists)
   }
 
   return (
@@ -93,25 +91,14 @@ export const TodoList = () => {
               <p>{todos.from}</p>
               <p>{todos.end}</p>
               <p>{todos.todo}</p>
-              {/* EvnentButtonコンポーネントを呼び出す */}
-              {/* <Button
-                clickEvent={onDeleteTodo}
-                indexNumber={index}
-                buttonName={"削除"}
-              /> */}
+              {/* Buttonコンポーネントにアロー関数で関数onDeleteTodo(index)をPropsで渡す。indexは引数 */}
               <Button onClickEvent={() => onDeleteTodo(index)}>削除</Button>
-              {/* <Button
-                clickEvent={onCompleteTodo}
-                indexNumber={index}
-                buttonName={"完了"}
-              /> */}
+              {/* Buttonコンポーネントにアロー関数で関数onCompleteTodo(index)をPropsで渡す。indexは引数 */}
               <Button onClickEvent={() => onCompleteTodo(index)}>完了</Button>
-              {/* <Button onClickEvent={onCompleteTodo(index)}>削除</Button> */}
             </StyledList>
           )
         })}
       </ul>
-      {/* <LinkText destination={"/todoregister"} linkName={"Todo登録"} /> */}
       <LinkText destination={"/todoregister"}>Todo登録</LinkText>
     </div>
   )

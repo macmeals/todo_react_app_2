@@ -103,8 +103,7 @@ export const TodoRegister = () => {
         value={newTodo}
         onChange={changeValue}
       />
-      {/* EvnentButtonコンポーネントを呼び出す。clickEventにイベント buttonNameを名前をPropsに渡す*/}
-      {/* <Button clickEvent={onAddTodo} buttonName={"登録"} /> */}
+      {/* Buttonコンポーネントにアロー関数で関数onAddTodoをPropsで渡す。 */}
       <Button onClickEvent={() => onAddTodo()}>登録</Button>
       <Toaster />
       {/* LinkTextコンポーネントを呼び出す。destinationにリンク先、linkNameにリンク名、格納した配列をlinkStateにPropで渡す */}
