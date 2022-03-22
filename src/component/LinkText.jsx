@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 import { css } from "@emotion/react"
 
 export const LinkText = (props) => {
-  // const { destination, linkName, linkState } = props
   const { destination, linkState } = props
   const linkstyle = css`
     font-size: 20px;
