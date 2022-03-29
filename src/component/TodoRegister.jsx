@@ -60,6 +60,7 @@ export const TodoRegister = () => {
     setStartDate(undefined) // 開始日をリセット
     setEndDate(undefined) // 終了日をリセット
   }
+
   // 開始日の状態を保存
   // onDayClickのイベントハンドラーはdayという引数で日程を取得可能
   // 取得した日程をstartDateの状態を保管
@@ -72,6 +73,8 @@ export const TodoRegister = () => {
   const handleEndDay = (day) => {
     setEndDate(day.toLocaleDateString())
   }
+
+  console.log("TodoRegisterのレンダリング")
 
   return (
     <div css={registerStyle}>

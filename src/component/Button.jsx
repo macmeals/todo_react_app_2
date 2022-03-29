@@ -2,9 +2,9 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from "@emotion/styled"
+import { memo } from "react"
 
-export const Button = (props) => {
-  // const { clickEvent, indexNumber, buttonName } = props
+export const Button = memo((props) => {
   const { onClickEvent } = props
   const StyledButton = styled.button`
     color: black;
@@ -27,6 +27,8 @@ export const Button = (props) => {
       background-color: black;
     }
   `
+  console.log("Buttonのレンダリング")
+
   return (
     <div>
       <StyledButton
@@ -38,4 +40,5 @@ export const Button = (props) => {
       </StyledButton>
     </div>
   )
-}
+})
+Button.displayName = "Button" //ESlintのメモ化のエラーを回避

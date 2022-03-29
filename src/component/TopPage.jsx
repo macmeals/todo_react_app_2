@@ -15,6 +15,8 @@ export const TopPage = () => {
     align-items: center;
   `
 
+  console.log("TopPageのレンダリング")
+
   return (
     <div>
       <div css={topStyle}>

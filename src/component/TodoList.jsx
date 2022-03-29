@@ -8,6 +8,7 @@ import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import { LinkText } from "./LinkText"
 import { Button } from "./Button"
+import { useCallback } from "react"
 
 export const TodoList = () => {
   const todoStyle = css`
@@ -60,19 +61,27 @@ export const TodoList = () => {
   }, [])
 
   // todoリストを削除する関数onDeleteTodoを定義
-  const onDeleteTodo = (index) => {
-    const deleteTodos = [...todoLists] // 削除する対象のデータ配列を関数deleteTodoに格納
-    deleteTodos.splice(index, 1) // index番号から１番目の要素を削除
-    setTodoLists(deleteTodos)
-    // setTodoListsでtodoListsにstate保存
-  }
+  const onDeleteTodo = useCallback(
+    (index) => {
+      const deleteTodos = [...todoLists] // 削除する対象のデータ配列を関数deleteTodoに格納
+      deleteTodos.splice(index, 1) // index番号から１番目の要素を削除
+      setTodoLists(deleteTodos)
+      // setTodoListsでtodoListsにstate保存
+    },
+    [todoLists]
+  )
 
   // todoリストを完了（completeFlagをTrueにする）関数onCompleteTodoを定義
-  const onCompleteTodo = (index) => {
-    const CompleteTodos = [...todoLists] // 完了する対象のデータ配列を関数CompTodosTodoに格納
-    CompleteTodos[index].completeFlag = true //対象のデータ配列のCompleteFlagをTrueにする
-    setTodoLists(CompleteTodos) // setTodoListsでtodoListsにstate保存
-  }
+  const onCompleteTodo = useCallback(
+    (index) => {
+      const CompleteTodos = [...todoLists] // 完了する対象のデータ配列を関数CompTodosTodoに格納
+      CompleteTodos[index].completeFlag = true //対象のデータ配列のCompleteFlagをTrueにする
+      setTodoLists(CompleteTodos) // setTodoListsでtodoListsにstate保存
+    },
+    [todoLists]
+  )
+
+  console.log("TodoListのレンダリング")
 
   return (
     <div css={todoStyle}>
