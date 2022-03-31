@@ -12,8 +12,6 @@ export const LinkText = memo((props) => {
     height: 50px;
   `
 
-  console.log("LinkTextのレンダリング")
-
   return (
     <Link to={destination} state={{ state: linkState }} css={linkstyle}>
       {props.children}

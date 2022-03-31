@@ -8,6 +8,7 @@ import DayPicker from "react-day-picker"
 import "react-day-picker/lib/style.css"
 import axios from "axios"
 import { useState } from "react"
+import { Image } from "./Image"
 
 export const TopPage = () => {
   const [image, setImage] = useState([])
@@ -18,19 +19,17 @@ export const TopPage = () => {
     align-items: center;
   `
 
-  const pikaImg = async () => {
+  const frontImage = async () => {
     try {
       // ポケモンAPIからピカチュウの情報をaxiosで取得
       const response = await axios.get("https://pokeapi.co/api/v2/pokemon/25")
-      // ポケモンAPIのピカチュウの画像をStateで保存
+      // ポケモンAPIのピカチュウの画像(前）をStateで保存
       setImage(response.data.sprites.front_default)
     } catch {
-      console.log("ピカチュウの画像が取れませんでした")
+      console.log("画像が取得できませんでした")
     }
   }
-  pikaImg()
-
-  // console.log("TopPageのレンダリング")
+  frontImage()
 
   return (
     <div>
@@ -38,7 +37,7 @@ export const TopPage = () => {
         <h1>Todoアプリ</h1>
         <Link to="/todoregister">Todo登録</Link>
         <DayPicker />
-        <img src={image} alt="ピカチュウ画像" />
+        <Image url={image} />
       </div>
     </div>
   )

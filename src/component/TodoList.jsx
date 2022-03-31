@@ -9,6 +9,7 @@ import styled from "@emotion/styled"
 import { LinkText } from "./LinkText"
 import { Button } from "./Button"
 import { useCallback } from "react"
+import axios from "axios"
 
 export const TodoList = () => {
   const todoStyle = css`
@@ -53,6 +54,7 @@ export const TodoList = () => {
 
   const { state } = useLocation()
   const [todoLists, setTodoLists] = useState([])
+  const [jsontext, setjsonText] = useState([])
 
   // 画面変移時に一度だけ、TodoListのStateを更新する。
   // その為UseEffectの第二変数に[]を記載
@@ -81,11 +83,25 @@ export const TodoList = () => {
     [todoLists]
   )
 
-  console.log("TodoListのレンダリング")
+  const textApi = async () => {
+    try {
+      // jsonPlaceholderからユーザー情報をaxiosで取得
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/todos"
+      )
+      // jsonPlaceholderからユーザー情報をStateで保存
+      setjsonText(response.data[1].title)
+    } catch {
+      console.log("テキストが取得できませんでした")
+    }
+  }
+  textApi()
 
   return (
     <div css={todoStyle}>
       <h2>Todo一覧</h2>
+      {/* sonPlaceholderの情報を表示 */}
+      <p>{jsontext}</p>
       <div css={todoTitleStyle}>
         <TodoTitles>
           <p>Todo開始日</p>

@@ -8,6 +8,8 @@ import DayPicker from "react-day-picker"
 import "react-day-picker/lib/style.css"
 import { LinkText } from "./LinkText"
 import { Button } from "./Button"
+import axios from "axios"
+import { Image } from "./Image"
 
 export const TodoRegister = () => {
   const registerStyle = css`
@@ -36,6 +38,21 @@ export const TodoRegister = () => {
 
   // 初期値incompTodosにオブジェクト型の空配列をセット、状態をsetIncompleteTodosに格納する
   const [incompleteTodos, setIncompleteTodos] = useState([])
+
+  // ピカチュウ画像状態をsetBackImageに格納する
+  const [backimage, setBackImage] = useState([])
+
+  const backImage = async () => {
+    try {
+      // ポケモンAPIからピカチュウの情報をaxiosで取得
+      const response = await axios.get("https://pokeapi.co/api/v2/pokemon/25")
+      // ポケモンAPIのピカチュウの画像(前）をStateで保存
+      setBackImage(response.data.sprites.back_female)
+    } catch {
+      console.log("画像が取得できませんでした")
+    }
+  }
+  backImage()
 
   // todoタスクのテキストボックスで入力した値を保存する
   const changeValue = (e) => setNewTodo(e.target.value)
@@ -74,11 +91,11 @@ export const TodoRegister = () => {
     setEndDate(day.toLocaleDateString())
   }
 
-  console.log("TodoRegisterのレンダリング")
-
   return (
     <div css={registerStyle}>
       <h2>Todo登録</h2>
+      {/* ピカチュウの画像をImageコンポーネントで呼び出す */}
+      <Image url={backimage} />
       <div css={matrixStyle}>
         <div css={registerStyle}>
           <p>１．Todo開始日</p>
